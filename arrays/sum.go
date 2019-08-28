@@ -1,5 +1,9 @@
 package main
 
 func Sum(arr [5]int) int {
-	return 1
+	var sum int
+	for i := 0; i < 5; i++ {
+		sum += arr[i]
+	}
+	return sum
 }

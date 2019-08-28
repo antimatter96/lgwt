@@ -2,8 +2,8 @@ package main
 
 func Sum(arr [5]int) int {
 	var sum int
-	for i := 0; i < 5; i++ {
-		sum += arr[i]
+	for _, val := range arr {
+		sum += val
 	}
 	return sum
 }

@@ -1,6 +1,6 @@
 package main
 
-func Sum(arr [5]int) int {
+func Sum(arr []int) int {
 	var sum int
 	for _, val := range arr {
 		sum += val

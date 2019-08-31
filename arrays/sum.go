@@ -11,7 +11,19 @@ func Sum(arr []int) int {
 func SumAll(arr ...[]int) (sums []int) {
 	sums = make([]int, len(arr))
 	for i, val := range arr {
-		sums[i] += Sum(val)
+		sums[i] = Sum(val)
+	}
+	return sums
+}
+
+func SumAllTails(arr ...[]int) (sums []int) {
+	sums = make([]int, len(arr))
+	for i, val := range arr {
+		if len(val) < 1 {
+			sums[i] = 0
+		} else {
+			sums[i] += Sum(val[1:])
+		}
 	}
 	return sums
 }

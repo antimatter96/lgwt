@@ -13,17 +13,18 @@ type Circle struct {
 	Radius float64
 }
 
-func Perimeter(rectangle Rectangle) (perimeter float64) {
-	perimeter = 2 * (rectangle.Length + rectangle.Breadth)
-	return
+func (r Rectangle) Perimeter() float64 {
+	return 2 * (r.Length + r.Breadth)
 }
 
-func Area(rectangle Rectangle) (perimeter float64) {
-	perimeter = rectangle.Length * rectangle.Breadth
-	return
+func (r Rectangle) Area() float64 {
+	return r.Length * r.Breadth
 }
 
-func Area(circle Circle) (perimeter float64) {
-	perimeter = circle.Radius * circle.Radius * math.Pi
-	return
+func (c Circle) Perimeter() float64 {
+	return 2 * math.Pi * c.Radius
+}
+
+func (c Circle) Area() float64 {
+	return math.Pi * c.Radius * c.Radius
 }

@@ -18,6 +18,9 @@ func (w *Wallet) Deposit(amount Bitcoin) {
 }
 
 func (w *Wallet) Withdraw(amount Bitcoin) error {
+	if w.balance < amount {
+		return fmt.Errorf("Balance low. Have %s, Withdrawing %s", w.balance, amount)
+	}
 	w.balance -= amount
 	return nil
 }

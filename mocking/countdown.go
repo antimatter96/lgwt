@@ -12,9 +12,15 @@ const countdownStart = 3
 
 func Countdown(out io.Writer, sleeper Sleeper) {
 	for i := countdownStart; i > 0; i-- {
-		sleeper.Sleep()
+		//sleeper.Sleep()
 		fmt.Fprintf(out, "%d\n", i)
 	}
+
+	for i := countdownStart; i > 0; i-- {
+		sleeper.Sleep()
+		//fmt.Fprintf(out, "%d\n", i)
+	}
+
 	sleeper.Sleep()
 	fmt.Fprintf(out, "%s", finalWord)
 }

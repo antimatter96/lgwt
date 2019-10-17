@@ -32,19 +32,6 @@ func (ss *SuperSpy) Sleep() {
 
 }
 
-type SpyTime struct {
-	durationSlept time.Duration
-}
-
-func (s *SpyTime) Sleep(duration time.Duration) {
-	s.durationSlept = duration
-}
-
-type ConfigurableSleeper struct {
-	duration time.Duration
-	sleep    func(time.Duration)
-}
-
 func TestCountdown(t *testing.T) {
 	t.Run("Prints 3,2,1,Go!", func(t *testing.T) {
 		buffer := &bytes.Buffer{}
@@ -82,6 +69,22 @@ Go!`
 
 	})
 
+}
+
+type SpyTime struct {
+	durationSlept time.Duration
+}
+
+func (s *SpyTime) Sleep(duration time.Duration) {
+	s.durationSlept = duration
+}
+
+type ConfigurableSleeper struct {
+	duration time.Duration
+	sleep    func(time.Duration)
+}
+
+func (c *ConfigurableSleeper) Sleep() {
 }
 
 func TestConfigurableSleeper(t *testing.T) {

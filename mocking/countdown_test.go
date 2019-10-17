@@ -4,15 +4,16 @@ import (
 	"bytes"
 	"reflect"
 	"testing"
+	"time"
 )
 
-type SpySleeper struct {
-	Calls int
-}
+// type SpySleeper struct {
+// 	Calls int
+// }
 
-func (s *SpySleeper) Sleep() {
-	s.Calls++
-}
+// func (s *SpySleeper) Sleep() {
+// 	s.Calls++
+// }
 
 const writeOP = "write"
 const sleepOP = "sleep"
@@ -29,6 +30,19 @@ func (ss *SuperSpy) Write(p []byte) (int, error) {
 func (ss *SuperSpy) Sleep() {
 	ss.Calls = append(ss.Calls, sleepOP)
 
+}
+
+type SpyTime struct {
+	durationSlept time.Duration
+}
+
+func (s *SpyTime) Sleep(duration time.Duration) {
+	s.durationSlept = duration
+}
+
+type ConfigurableSleeper struct {
+	duration time.Duration
+	sleep    func(time.Duration)
 }
 
 func TestCountdown(t *testing.T) {
@@ -68,4 +82,16 @@ Go!`
 
 	})
 
+}
+
+func TestConfigurableSleeper(t *testing.T) {
+	sleepTime := 5 * time.Second
+
+	spyTime := &SpyTime{}
+	sleeper := ConfigurableSleeper{sleepTime, spyTime.Sleep}
+	sleeper.Sleep()
+
+	if spyTime.durationSlept != sleepTime {
+		t.Errorf("should have slept for %v but slept for %v", sleepTime, spyTime.durationSlept)
+	}
 }

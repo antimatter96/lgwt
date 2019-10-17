@@ -79,14 +79,6 @@ func (s *SpyTime) Sleep(duration time.Duration) {
 	s.durationSlept = duration
 }
 
-type ConfigurableSleeper struct {
-	duration time.Duration
-	sleep    func(time.Duration)
-}
-
-func (c *ConfigurableSleeper) Sleep() {
-}
-
 func TestConfigurableSleeper(t *testing.T) {
 	sleepTime := 5 * time.Second
 
